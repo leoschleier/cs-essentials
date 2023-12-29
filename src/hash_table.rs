@@ -1,18 +1,18 @@
 use log::debug;
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 struct Node<T> {
     value: T,
     next: Box<LinkedList<T>>,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 struct KeyValue<T> {
     key: Box<str>,
     value: T,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 enum LinkedList<T> {
     Null,
     Node(Node<T>),
@@ -21,6 +21,7 @@ enum LinkedList<T> {
 const TABLE_LEN: usize = 10;
 const TABLE_LEN_U64: u64 = TABLE_LEN as u64;
 
+#[derive(Debug)]
 pub struct HashTable<T> {
     arr: [LinkedList<KeyValue<T>>; TABLE_LEN],
 }
@@ -65,7 +66,7 @@ impl<T: std::cmp::PartialEq> HashTable<T> {
                 // If at the end of LinkedList --> Append new node
                 debug!("Reached end. Add new node.");
                 node.next = Box::new(LinkedList::Node(
-                    HashTable::create_tail_node(key, value),
+                    HashTable::<T>::create_tail_node(key, value),
                 ));
                 break;
             }
