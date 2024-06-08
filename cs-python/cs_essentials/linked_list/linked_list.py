@@ -5,13 +5,16 @@ class Node[T]:
         self.value = value
         self.next: Node[T] | None = None
 
+    def __str__(self) -> str:
+        return str(self.value)
+
 class LinkedList[T]:
 
     def __init__(self):
-        self._head: Node[T] | None = None
+        self.head: Node[T] | None = None
     
     def __str__(self) -> str:
-        node = self._head
+        node = self.head
         if node is None:
             return str(None)
         
@@ -23,14 +26,13 @@ class LinkedList[T]:
         
         ll += f"{node.value}]"
         return ll
-
     
     def append(self, value: T) -> None:
         new_node = Node(value)
-        node = self._head
+        node = self.head
 
         if node is None:
-            self._head = new_node
+            self.head = new_node
             return
 
         while node.next is not None:
@@ -39,12 +41,12 @@ class LinkedList[T]:
         node.next = new_node
 
     def remove(self, value: T) -> Node[T] | None:
-        node = self._head
+        node = self.head
 
         if node is None:
             return node
         elif node.value == value:
-            self._head = node.next
+            self.head = node.next
             return node
 
         while node.next is not None:
