@@ -1,40 +1,37 @@
-[tool.poetry]
+[project]
 name = "cs-essentials"
 version = "0.1.0"
-description = "Computer Science essentials."
-authors = ["Leo Schleier <43878374+leoschleier@users.noreply.github.com>"]
+description = "Computer Science essentials"
+authors = [
+    {name = "Leo Schleier", email = "<43878374+leoschleier@users.noreply.github.com>"},
+]
 license = "MIT"
 readme = "README.md"
+requires-python = "==3.13.*"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.0"
-ruff = "^0.4.4"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pyright>=1.1.403",
+    "pytest>=8.4.1",
+    "ruff>=0.12.3",
+]
 
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "strict"
 include = ["cs_essentials", "tests"]
-pythonVersion = "3.12"
+pythonVersion = "3.13"
 
 [tool.ruff]
 fix = true
 line-length = 79
-target-version = "py311"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "ANN401",  # Use of typing.Any  
     "COM812",  # Missing trailing comma (formatter)
-    "ISC001",  # Single line implicit string concatenation (formatter)
 ]
 fixable = ["ALL"]
 
@@ -42,9 +39,9 @@ fixable = ["ALL"]
 max-doc-length = 72
 
 [tool.ruff.lint.pydocstyle]
-convention = "numpy"
+convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["E401"]  # Unused import
 "tests/*" = ["S101"]  # Use of assert detected
+
 
